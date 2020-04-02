@@ -1,0 +1,50 @@
+<%- include ../layouts/header.ejs %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><%= title %><a href="/animal/add" class= "pull-right"><i class="fa fa-plus fa-fw"></i>Inscrire un Animal</a></div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'animal</th>
+                            <th>Age de l'animal</th>
+                            <th>Poids de l'animal (en KG)</th>
+                            <th>Règne animal</th>
+                            <th>Nom propriétaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (animals) { %>
+                        <% animals.forEach(function(animal){ %>
+                        <tr>
+                            <td>
+                                <%= animal.nom %>
+                            </td>
+                            <td>
+                                <%= animal.age %>
+                            </td>
+                            <td>
+                                <%= animal.poids %>
+                            </td>
+                            <td>
+                                <%= animal.regneAnimal %>
+                            </td>
+                            <td>
+                                <%= animal.proprietaire %>
+                            </td>
+                            <td>
+                                <a href="/animal/edit/<%= animal.idAnimal %>"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../layouts/footer.ejs %>

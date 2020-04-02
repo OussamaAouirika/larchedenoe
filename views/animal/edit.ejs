@@ -1,0 +1,39 @@
+<%- include ../layouts/header.ejs %>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><%= title %></div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/animal/edit/<%= animal[0].idAnimal %>" method="POST">
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="nom">Nom Animal</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Entrez nom Animal" value="<%= animal[0].nom %>">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="age">Age Animal</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="age" id="age" placeholder="Entrez age Animal" value="<%= animal[0].age %>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="poids">Poids Animal</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="poids" id="poids" placeholder="Entrez poids Animal" value="<%= animal[0].poids %>">
+                        </div>
+                      </div>
+                    <div class="form-group"> 
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Inscrire</button>
+                        <a href="/animal"><button type="button" class="btn btn-default">Annuler</button></a>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../layouts/footer.ejs %>
