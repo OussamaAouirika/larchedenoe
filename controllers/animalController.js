@@ -1,4 +1,5 @@
 var animalModel= require('../models/animalModel');
+var regneModel= require('../models/regneModel');
 var animalController=function(){}
 
 animalController.index=function(req,res,next){
@@ -12,12 +13,18 @@ animalController.index=function(req,res,next){
     });
 }
 animalController.add=function(req,res,next){
-    res.render('animal/add',{title:'Add Animal'});
+    regneModel.getAllRegne(function (err, regnes) {
+        res.render('animal/add', { title: 'Add Animal', regnes: regnes });
+    });
 }
 animalController.save=function(req,res){
     req.assert('nom', 'Nom is required').notEmpty(); 
     req.assert('age', 'Age is required').notEmpty();      
     req.assert('poids', 'Size is required').notEmpty(); 
+    req.assert('regne', 'Regne is required').notEmpty(); 
+    req.assert('proprietaire', 'Proprietaire is required').notEmpty(); 
+
+
  
     var errors = req.validationErrors();
     if( !errors ) {
@@ -25,8 +32,8 @@ animalController.save=function(req,res){
             nom:req.sanitize('nom').escape().trim(),
             age:req.sanitize('age').escape().trim(),
             poids:req.sanitize('poids').escape().trim(),
-            regneAnimal:req.sanitize('poids').escape().trim(),
-            proprietaire:req.sanitize('poids').escape().trim(),
+            regne:req.sanitize('regne').escape().trim(),
+            proprietaire:req.sanitize('proprietaire').escape().trim(),
         }
         animalModel.insertAnimal(newAnimal,function(err){
          if(err){
@@ -41,8 +48,10 @@ animalController.save=function(req,res){
         errors.forEach(function(err){
             err_msg+=err.msg+"<br/>";
         })
-         req.flash('error', err_msg);
-         res.render('animal/add',{title:'Add Animal'});
+        regneModel.getAllRegne(function (err, regnes) {
+            req.flash('error', err_msg);
+            res.render('animal/add', { title: 'Add Animal', regnes: regnes });
+        });
     }
 }
 animalController.edit=function(req,res){
@@ -52,7 +61,9 @@ animalController.edit=function(req,res){
             req.flash('error','Sorry the animal doesnot exists!!');
             res.redirect('/animal');
         }else{
-          res.render('animal/edit',{title:'Edit animal',animal:result});
+            regneModel.getAllRegne(function(err,regnes){
+                res.render('animal/edit',{title: 'Edit Animal',regnes:regnes,animal:result[0]});
+            });
         }
     })
 }
@@ -62,12 +73,18 @@ animalController.update=function(req,res){
     req.assert('nom', 'Nom is required').notEmpty(); 
     req.assert('age', 'Age is required').notEmpty();
     req.assert('poids', 'Poids is required').notEmpty();   
+    req.assert('regne', 'Regne is required').notEmpty();   
+    req.assert('proprietaire', 'Proprietaire is required').notEmpty();   
+
+
     var errors = req.validationErrors();
     if( !errors ) {
         var animal={
             nom:req.sanitize('nom').escape().trim(),
             age:req.sanitize('age').escape().trim(),
             poids:req.sanitize('poids').escape().trim(),
+            regne:req.sanitize('regne').escape().trim(),
+            proprietaire:req.sanitize('proprietaire').escape().trim(),
         }
         animalModel.updateAnimal(animalId,animal,function(result){
                 if(result.affectedRows==1){

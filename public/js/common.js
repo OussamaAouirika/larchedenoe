@@ -3,23 +3,22 @@ $(document).ready(function(){
         autoclose: true
     });
 
-    $(document).on('click','.view-employee',function(e){
+    $(document).on('click','.view-animal',function(e){
         e.preventDefault();
-        var employee_id=$(this).attr('data-employee-id');
+        var animal_id=$(this).attr('data-animal-id');
         $.ajax({
-            url:"/employee/view",
+            url:"/animal/view",
             type:'POST',
             dataType:'JSON',
-            data:{employee_id:employee_id},
+            data:{animal_id:animal_id},
             success:function(response){
                 if(response.status==1){
-                    $modal=$('#employee_detail');  
-                    $modal.find('.employee-name').text(response.data[0].name);
-                    $modal.find('.employee-email').text(response.data[0].email);
-                    $modal.find('.employee-company').text(response.data[0].company_name);
-                    $modal.find('.employee-dob').text(response.data[0].joining_date);
-                    $modal.find('.employee-doj').text(response.data[0].date_of_birth);
-                    $modal.find('.employee-dol').text(response.data[0].leaving_date);
+                    $modal=$('#animal_detail');  
+                    $modal.find('.animal-name').text(response.data[0].name);
+                    $modal.find('.animal-age').text(response.data[0].age);
+                    $modal.find('.animal-poids').text(response.data[0].poids);
+                    $modal.find('.animal-regne').text(response.data[0].regne);
+                    $modal.find('.animal-proprietaire').text(response.data[0].proprietaire);
                     $modal.modal('show');
                 }else{
                     alert(response.message);
@@ -27,13 +26,12 @@ $(document).ready(function(){
             }
         });
     });
-    $(document).on('hide.bs.modal','#employee_detail',function(){
-        $modal=$('#employee_detail');  
-        $modal.find('.employee-name').text('');
-        $modal.find('.employee-email').text('');
-        $modal.find('.employee-company').text('');
-        $modal.find('.employee-dob').text('');
-        $modal.find('.employee-doj').text('');
-        $modal.find('.employee-dol').text('');
+    $(document).on('hide.bs.modal','#animal_detail',function(){
+        $modal=$('#animal_detail');  
+        $modal.find('.animal-name').text('');
+        $modal.find('.animal-age').text('');
+        $modal.find('.animal-poids').text('');
+        $modal.find('.animal-regne').text('');
+        $modal.find('.animal-proprietaire').text('');
     });
 });
