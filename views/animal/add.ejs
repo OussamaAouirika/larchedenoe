@@ -30,13 +30,27 @@
                                 <option value="">Select Regne</option>
                             <% if (regnes) { %>
                                 <% regnes.forEach(function(regne){ %>
-                                    <option value="<%= regne.idRegne %>"><%= regne.nomregne %> (<%= regne.provenance %>) </option>
+                                    <option value="<%= regne.idRegne %>"><%= regne.idRegne %> : <%= regne.nomregne %> (<%= regne.provenance %>) </option>
                                 <% }) %>
                             <% } %>         
                             
                           </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="proprietaire">Proprietaire Animal</label>
+                      <div class="col-sm-10">
+                        <select class="form-control" name="proprietaire" id="proprietaire">
+                              <option value="">Select Proprietaire</option>
+                          <% if (users) { %>
+                              <% users.forEach(function(proprietaire){ %>
+                                  <option value="<%= proprietaire.idUser %>"><%= proprietaire.idUser %> : <%= proprietaire.login %> </option>
+                              <% }) %>
+                          <% } %>         
+                          
+                        </select>
+                      </div>
+                  </div>
                     <div class="form-group"> 
                       <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">Insérer</button>

@@ -11,7 +11,7 @@ routes.get('/',controllers.homeController.index);
 routes.get('/animal',controllers.animalController.index);
 routes.get('/animal/add',controllers.animalController.add);
 routes.post('/animal/add',controllers.animalController.save);
-routes.get('/animal/edit/(:id)',controllers.animalController.edit);
-routes.post('/animal/edit/(:id)',controllers.animalController.update);
+routes.get('/animal/edit/(:idAnimal)',controllers.animalController.edit);
+routes.post('/animal/edit/(:idAnimal)',controllers.animalController.update);
 
 module.exports=routes;

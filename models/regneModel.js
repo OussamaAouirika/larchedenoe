@@ -46,6 +46,19 @@ regneModel.updateRegne=function(regneId,regne,result){
 
     });
 }
+regneModel.getRegneById=function(regneId,result){
+    sql.query("SELECT regne.* FROM regne WHERE idRegne="+regneId,function(err,rows){
+        if(err)
+            return result(err);
+
+        if (rows.length <= 0) {
+            return result(err);
+        }
+        else { 
+            return result(rows);
+        }  
+    });
+}
 //TODO delete
 regneModel.deleteRegne=function(regneId,regne,result){
     sql.query("UPDATE regne SET  ? WHERE id="+regneId,regne,function(err,rows){

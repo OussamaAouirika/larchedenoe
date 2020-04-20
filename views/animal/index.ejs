@@ -11,13 +11,16 @@
                             <th>Age de l'animal</th>
                             <th>Poids de l'animal (en KG)</th>
                             <th>Règne animal</th>
+                            <th>Provenance animal</th>
+                            <th>Espace Vital animal</th>
                             <th>Nom propriétaire</th>
+                            <th>EDIT</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% if (animals) { %>
                         <% animals.forEach(function(animal){ %>
-                        <tr>
+                       <tr>
                             <td>
                                 <%= animal.nom %>
                             </td>
@@ -28,13 +31,20 @@
                                 <%= animal.poids %>
                             </td>
                             <td>
-                                <%= animal.regneAnimal.nomregne %>
+                                <%= animal.nomregne %>
                             </td>
                             <td>
-                                <%= animal.proprietaire %>
+                                <%= animal.provenance %>
                             </td>
                             <td>
-                                <a href="/animal/edit/<%= animal.idAnimal %>"><i class="fa fa-edit"></i></a>
+                                <%= animal.espace %>
+                            </td>
+                            <td>
+                                <%= animal.login %>
+                            </td>
+                            <td>
+                                <% console.log("ID:"+animal.idAnimal); %>
+                                <a href="/animal/edit/<%= animal.idAnimal %>"><i class="fa fa-edit"></i></a>                              
                             </td>
                         </tr>
                         <% }) %>

@@ -4,7 +4,7 @@ var animalModel={
 
 }
 animalModel.getAllAnimal=function(result){
-    sql.query("SELECT * FROM animal",function(err,res){
+    sql.query("SELECT animal.idAnimal,animal.nom,animal.age,animal.poids,regne.nomregne,regne.provenance,regne.espace,utilisateur.login FROM animal JOIN regne, utilisateur WHERE regneAnimal = idRegne and proprietaire = idUser",function(err,res){
         if(err) {
             return result(err,null);
         }
@@ -24,7 +24,7 @@ animalModel.insertAnimal=function(newAnimal,result)
     });
 }
 animalModel.findAnimalById=function(animalId,result){
-    sql.query("SELECT * FROM animal WHERE idAnimal ="+animalId,function(err,rows){
+    sql.query("SELECT * from animal WHERE idAnimal ="+animalId,function(err,rows){
         if(err)
             throw err;
       
