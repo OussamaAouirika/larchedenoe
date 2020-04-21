@@ -44,7 +44,14 @@
                             </td>
                             <td>
                                 <% console.log("ID:"+animal.idAnimal); %>
-                                <a href="/animal/edit/<%= animal.idAnimal %>"><i class="fa fa-edit"></i></a>                              
+                                <a href="/animal/edit/<%= animal.idAnimal %>"><i class="fa fa-edit"></i></a> 
+                            </td>
+                            <td>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <a href="/animal/delete/<%= animal.idAnimal %>"><button type="button" class="btn btn-default">delete</button></a>
+                                </div>
+                              </div>
                             </td>
                         </tr>
                         <% }) %>

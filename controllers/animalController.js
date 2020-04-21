@@ -40,6 +40,7 @@ animalController.save=function(req,res){
             regne:req.sanitize('regne').escape().trim(),
             proprietaire:req.sanitize('proprietaire').escape().trim()
         }
+        console.log("POIDS ANIMAL:"+newAnimal.poids);
         animalModel.insertAnimal(newAnimal,function(err){
          if(err){
              req.flash('error','There was error in inserting data');
@@ -115,6 +116,18 @@ animalController.update=function(req,res){
          res.redirect('/animal/edit/'+animalId);
     }
 }
-
+animalController.delete=function(req,res){
+    var animalId=req.params.idAnimal;
+    console.log("DELEEEETION :   "+animalId);
+    animalModel.deleteAnimal(animalId,function(result){
+        if(result==null){
+            req.flash('error','Sorry the animal cannot be deleted !!');
+            res.redirect('/animal');
+        }else{
+            req.flash('success', 'Animal Information deleted successfully.');
+            res.redirect('/animal');
+        }
+    })
+}
 
 module.exports=animalController;

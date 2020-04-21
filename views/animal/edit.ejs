@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading"><%= title %></div>
             <div class="panel-body">
-                <form class="form-horizontal" action="/animal/add" method="POST">
+                <form class="form-horizontal" action="/animal/edit/<%= animal.idAnimal %>" method="POST">
                     <div class="form-group">
                       <label class="control-label col-sm-2" for="nom">Nom Animal</label>
                       <div class="col-sm-10">

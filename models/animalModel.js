@@ -15,8 +15,11 @@ animalModel.getAllAnimal=function(result){
 }
 animalModel.insertAnimal=function(newAnimal,result)
 {
-    sql.query("INSERT INTO animal SET ?",newAnimal,function(err,res){
+    let stmt = "INSERT INTO animal (nom,age,poids,regneAnimal,proprietaire) VALUES (?,?,?,?,?)";
+    let tab = [newAnimal.nom,newAnimal.age,newAnimal.poids,newAnimal.regne,newAnimal.proprietaire];
+    sql.query(stmt,tab,function(err,res){
         if(err){
+            console.log("ERREUR SQLLLLLL");
             return result(err,null);
         }else{
             return result(null,res);
@@ -37,13 +40,26 @@ animalModel.findAnimalById=function(animalId,result){
     })
 }
 
-animalModel.updateAnimal=function(animalId,animal,result){
-    sql.query("UPDATE animal SET  ? WHERE id="+animalId,animal,function(err,rows){
+animalModel.updateAnimal=function(animalId,newAnimal,result){
+
+    console.log("ID ANIMAL :"+animalId);
+    let stmt = "UPDATE  animal SET nom = ? ,age = ? ,poids = ? , regneAnimal = ?,proprietaire = ? where idAnimal ="+animalId;
+    let tab = [newAnimal.nom,newAnimal.age,newAnimal.poids,newAnimal.regne,newAnimal.proprietaire];
+    sql.query(stmt,tab,function(err,rows){
         if(err)
             result(err); 
        
         return result(rows);
 
+    });
+}
+
+animalModel.deleteAnimal=function(animalId,result){
+    sql.query("DELETE FROM animal WHERE idAnimal="+animalId,function(err,rows){
+        if(err)
+        result(err); 
+
+        return result(rows);
     });
 }
 module.exports=animalModel;
