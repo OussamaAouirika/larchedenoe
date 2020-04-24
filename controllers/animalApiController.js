@@ -1,9 +1,9 @@
 var animalModel= require('../models/animalModel');
 var regneModel= require('../models/regneModel');
 var utilisateurModel= require('../models/utilisateurModel');
-var animalController=function(){}
+var animalApiController=function(){}
 
-animalController.index=function(req,res,next){
+animalApiController.index=function(req,res,next){
     animalModel.getAllAnimal(function(err,animals){
         if(err){
                 throw err;
@@ -14,14 +14,8 @@ animalController.index=function(req,res,next){
     });
 }
 
-animalController.add=function(req,res,next){
-    regneModel.getAllRegne(function (err, regnes) {
-        utilisateurModel.getAllUtilisateur(function (err, users) {
-            res.render('animal/add', { title: 'Add Animal', regnes: regnes, users:users});
-        });
-    });
-}
-animalController.save=function(req,res){
+
+animalApiController.save=function(req,res){
     console.log("DANS LE SAAAAVEEEE :   ");
     req.assert('nom', 'Nom is required').notEmpty(); 
     req.assert('age', 'Age is required').notEmpty();      
@@ -63,24 +57,9 @@ animalController.save=function(req,res){
         });
     }
 }
-animalController.edit=function(req,res){
-    var animalId=req.params.idAnimal;
-    console.log("SALUTTTTTTTTTT :   "+animalId);
-    animalModel.findAnimalById(animalId,function(result){
-        if(result==null){
-            req.flash('error','Sorry the animal doesnot exists!!');
-            res.redirect('/animal');
-        }else{
-            regneModel.getAllRegne(function(err,regnes){
-                utilisateurModel.getAllUtilisateur(function (err, users) {
-                    res.render('animal/edit',{title: 'Edit Animal',regnes:regnes,users:users,animal:result[0]});
-                });
-            });
-        }
-    })
-}
 
-animalController.update=function(req,res){
+
+animalApiController.update=function(req,res){
     console.log("DANS LE UPDATE :   "+animalId);
     var animalId=req.params.idAnimal;
     req.assert('nom', 'Nom is required').notEmpty(); 
@@ -118,7 +97,7 @@ animalController.update=function(req,res){
 //         res.redirect('/animal/edit/'+animalId);
     }
 }
-animalController.delete=function(req,res){
+animalApiController.delete=function(req,res){
     var animalId=req.params.idAnimal;
     console.log("DELEEEETION :   "+animalId);
     animalModel.deleteAnimal(animalId,function(result){
@@ -132,4 +111,4 @@ animalController.delete=function(req,res){
     })
 }
 
-module.exports=animalController;
+module.exports=animalApiController;
