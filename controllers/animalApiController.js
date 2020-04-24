@@ -1,7 +1,6 @@
 var animalModel= require('../models/animalModel');
 var regneModel= require('../models/regneModel');
 var utilisateurModel= require('../models/utilisateurModel');
-//var ctrlutil = require('./controllers/utilisateurController');
 var animalController=function(){}
 
 animalController.index=function(req,res,next){
@@ -9,7 +8,7 @@ animalController.index=function(req,res,next){
         if(err){
                 throw err;
         }else{
-            res.render('animal/index',{title:'Animal Listing',animals:animals});
+            res.json({animals:animals});
         }
        
     });
@@ -48,7 +47,7 @@ animalController.save=function(req,res){
          }else{
              req.flash('success','Animal added succesfully');
          }
-        res.redirect('/animal');
+        res.json({'message':'successssss!!!'});
         });
     }else{
         var err_msg="";
@@ -58,7 +57,8 @@ animalController.save=function(req,res){
         regneModel.getAllRegne(function (err, regnes) {
             utilisateurModel.getAllUtilisateur(function (err, users) {
                 req.flash('error', err_msg);
-                res.render('animal/add', { title: 'Add Animal', regnes: regnes, users:users });
+                res.json({'message':'Error invalid data for animal ;-('});
+             //   res.render('animal/add', { title: 'Add Animal', regnes: regnes, users:users });
             });
         });
     }
@@ -102,10 +102,10 @@ animalController.update=function(req,res){
         animalModel.updateAnimal(animalId,animal,function(result){
                 if(result.affectedRows==1){
                     req.flash('success', 'Animal Information update successfully.');
-                    res.redirect('/animal');
+                    res.json({'messge':'animal updated succesfully ;-)'});
                 }else{
                     req.flash('error', 'There was error in updating animal.');
-                    res.redirect('/animal/edit/'+animalId);  
+                    res.json({'message':'Error with updating animal ;-('});
                 }
         });
     }else{
@@ -114,7 +114,8 @@ animalController.update=function(req,res){
             err_msg+=err.msg+"<br/>";
         })
          req.flash('error', err_msg);
-         res.redirect('/animal/edit/'+animalId);
+         res.json({'message':'Error invalid data for animal ;-('});
+//         res.redirect('/animal/edit/'+animalId);
     }
 }
 animalController.delete=function(req,res){
@@ -123,10 +124,10 @@ animalController.delete=function(req,res){
     animalModel.deleteAnimal(animalId,function(result){
         if(result==null){
             req.flash('error','Sorry the animal cannot be deleted !!');
-            res.redirect('/animal');
+            res.json({'message':'error for delete'});
         }else{
             req.flash('success', 'Animal Information deleted successfully.');
-            res.redirect('/animal');
+            res.json({'message':'Successsss your animal is deleted'});
         }
     })
 }
