@@ -11,6 +11,18 @@ utilisateurController.index=function(req,res,next){
        
     });
 }
+
+
+utilisateurController.index2=function(req,res,next){
+    utilisateurModel.getAllUtilisateur(function(err,users){
+        if(err){
+                throw err;
+        }else{
+            res.send(users);
+        }
+       
+    });
+}
 utilisateurController.add=function(req,res,next){
     res.render('utilisateur/add',{title:'Add Utilisateur'});
 }

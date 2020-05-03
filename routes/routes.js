@@ -21,5 +21,9 @@ routes.post('/api/animals',controllers.animalApiController.save);
 routes.put('/api/animals/(:idAnimal)',controllers.animalApiController.update);
 routes.delete('/api/animals/(:idAnimal)',controllers.animalApiController.delete);
 
+//API regnes et users routes
+routes.get('/api/regnes',controllers.regnesApiController.index);
+routes.get('/api/users',controllers.utilisateurApiController.index);
+
 
 module.exports=routes;

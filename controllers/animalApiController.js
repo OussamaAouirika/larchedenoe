@@ -27,6 +27,7 @@ animalApiController.save=function(req,res){
  
     var errors = req.validationErrors();
     if( !errors ) {
+        console.log("regne AVANT ANIMAL:"+req.sanitize('regne'));
         var newAnimal={
             nom:req.sanitize('nom').escape().trim(),
             age:req.sanitize('age').escape().trim(),
@@ -34,7 +35,12 @@ animalApiController.save=function(req,res){
             regne:req.sanitize('regne').escape().trim(),
             proprietaire:req.sanitize('proprietaire').escape().trim()
         }
-        console.log("POIDS ANIMAL:"+newAnimal.poids);
+        console.log("proprio ANIMAL:"+newAnimal.proprietaire);
+        console.log("regne ANIMAL:"+newAnimal.regne);
+        console.log("age ANIMAL:"+newAnimal.age);
+        console.log("poids ANIMAL:"+newAnimal.poids);
+        console.log("nom ANIMAL:"+newAnimal.nom);
+
         animalModel.insertAnimal(newAnimal,function(err){
          if(err){
              req.flash('error','There was error in inserting data');
