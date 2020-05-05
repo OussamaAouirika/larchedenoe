@@ -105,7 +105,7 @@ animalApiController.update=function(req,res){
 }
 animalApiController.delete=function(req,res){
     var animalId=req.params.idAnimal;
-    console.log("DELEEEETION :   "+animalId);
+    console.log("DELEEEETION :"+animalId);
     animalModel.deleteAnimal(animalId,function(result){
         if(result==null){
             req.flash('error','Sorry the animal cannot be deleted !!');
